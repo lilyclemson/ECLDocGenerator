@@ -1,1 +1,1 @@
-# ECLDocGenerator
+# ECLDoc
