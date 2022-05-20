@@ -37,6 +37,9 @@ ecldoc --iroot ~/source/GNN --oroot ~/docs/GNN --eclcc=" -I ~/source" --exdocpat
 # DBSCAN
 ecldoc --iroot ~/source/dbscan --oroot ~/docs/dbscan --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "internal/*.ecl,tests/*.ecl,tests/datasets/*.ecl" --hideInternal
 
+# HPCC_Causality
+ecldoc --iroot ~/source/HPCC_Causality --oroot ~/docs/HPCC_Causality --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "Internal/*.ecl,tests/*.ecl" --hideInternal
+
 # Now we copy the resulting index.pdf files to files in our publish area named correctly for each bundle.
 
 cp -f ~/docs/ML_Core/tex/index.pdf ~/share/Publish/ML_Core.pdf
@@ -50,4 +53,5 @@ cp -f ~/docs/KMeans/tex/index.pdf ~/share/Publish/KMeans.pdf
 cp -f ~/docs/TextVectors/tex/index.pdf ~/share/Publish/TextVectors.pdf
 cp -f ~/docs/GNN/tex/index.pdf ~/share/Publish/GNN.pdf
 cp -f ~/docs/dbscan/tex/index.pdf ~/share/Publish/dbscan.pdf
+cp -f ~/docs/HPCC_Causality/tex/index.pdf ~/share/Publish/HPCC_Causality.pdf
 
