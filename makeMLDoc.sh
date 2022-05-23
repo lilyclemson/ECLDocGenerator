@@ -1,6 +1,11 @@
 #!/bin/sh
 # Generate each bundle's documentation
 
+sudo apt-get install make
+sudo apt-get -y install python3-pip
+sudo make install
+sudo apt install texlive-latex-base
+
 # ML_Core
 ecldoc --iroot ~/source/ML_Core --oroot ~/docs/ML_Core --format "html,pdf" --hideInternal
 
