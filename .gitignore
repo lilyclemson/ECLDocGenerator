@@ -10,3 +10,7 @@
 ehthumbs.db
 Thumbs.db
 
+#Env
+.env
+
+/my_env
