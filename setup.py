@@ -11,7 +11,7 @@ setuptools.setup(
     description="It's pip... with git.",
     long_description=long_description,
     url="https://github.com/championshuttler/ECLDocGenerator.git",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(include=['ECLDocGenerator', 'ECLDocGenerator.*']),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
