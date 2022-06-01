@@ -1,20 +1,30 @@
-import setuptools
+from setuptools import setup, find_packages
 
-with open("README.md", "r") as fh:
+import os
+
+
+with open("README.rst", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-setuptools.setup(
-    name="ECLDocGenerator",
-    version="0.0.1",
-    author="championshuttler",
-    author_email="shivams2799@gmail.com",
-    description="It's pip... with git.",
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+
+extra_files = package_files('src/ecldoc/Templates')
+
+setup(
+    name="ecldoc",
+    version="1.0",
+    packages=find_packages(),
+    install_requires=['Jinja2==2.9.6', 'lxml==3.8.0'],
+    package_data={'': extra_files},
+    scripts=['src/bin/ecldoc'],
+    url="https://github.com/lilyclemson/ECLDocGenerator",
     long_description=long_description,
-    url="https://github.com/championshuttler/ECLDocGenerator.git",
-    packages=setuptools.find_packages(),
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
+    long_description_content_type="text/rst",
 )
