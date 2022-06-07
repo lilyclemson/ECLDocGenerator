@@ -1,11 +1,16 @@
+from ntpath import join
+from operator import index
 import os
 import re
 import subprocess
+import time
 
 from lxml import etree
-from ecldoc.Utils import write_to_file
+from markdown import markdown
+from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
-
+from weasyprint import HTML
+from PyPDF2 import PdfMerger
 ##############################################################
 
 from ecldoc.Constants import TEMPLATE_DIR
@@ -216,9 +221,11 @@ class GenTEX(object) :
                                             bundle=bundle, label=tex_relpath, up="")
             write_to_file(temptoc_render_path, render)
 
+            # Render index.pdf
             start_path = relpath(temptoc_render_path, self.tex_path)
             render = self.index_template.render(root=start_path)
             write_to_file(index_render_path, render)
+
 
             subprocess.run(['pdflatex ' +
                             '-output-directory ' + relpath(content_root, self.tex_path) + ' ' +
@@ -231,6 +238,7 @@ class GenTEX(object) :
         '''
         Main Function called by ECLDOC
         '''
+        # import pdb; pdb.set_trace()
         print("\nGenerating PDF Documentation ... ")
         self.gen('root', self.ecl_file_tree, self.tex_root)
 
@@ -239,8 +247,32 @@ class GenTEX(object) :
         render = self.index_template.render(root=start_path)
         write_to_file(joinpath(self.tex_path, 'index.tex'), render)
 
-        subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
+        process = subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
+        process.check_returncode()
 
+        readme_pdf_path = joinpath(self.tex_path, 'readme.pdf')
+        index_pdf_path = joinpath(self.tex_path, 'index.pdf')
+        merged_pdf_path = joinpath(self.tex_path, 'new-index.pdf')
+        readme_md_path = joinpath(self.input_root, 'README.md')
+
+
+        # Render Readme.md inside readme.pdf
+        readme_data_in_markdown = read_file(readme_md_path)
+        readme_in_html = markdown(readme_data_in_markdown)
+        index_file = open(readme_pdf_path, "wb")
+        HTML(string = readme_in_html).write_pdf(target = index_file)
+        index_file.close()
+
+        # combine index.pdf and readme.pdf
+        pdf_merger = PdfMerger()
+        pdf_merger.append(joinpath(self.tex_path, 'index.pdf'))
+        pdf_merger.append(readme_pdf_path)
+        pdf_merger.write(joinpath(self.tex_path, 'new-index.pdf'))
+        pdf_merger.close()
+
+        os.remove(index_pdf_path)
+        os.remove(readme_pdf_path)
+        os.rename(merged_pdf_path, index_pdf_path)
 
 
 
