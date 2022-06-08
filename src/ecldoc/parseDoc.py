@@ -9,6 +9,7 @@ def parseDocstring(docstring) :
     break into individual tags and
     return them as XML Elements
     '''
+    docstring = re.sub(r'([@])\s+', r'\1', docstring)
     docstring = re.sub(r'\n\s*\*', '\n', docstring)
     docstring = re.sub(r'\r', ' ', docstring)
     docstring = docstring.strip().split('\n')
