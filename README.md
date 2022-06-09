@@ -6,7 +6,7 @@ Ecldoc is a tool for generating API Documentation for ECL Project based on their
 
 - You need Python3
 - Install pip3, setuptools
-- Install pdflatex (sudo apt-get install texlive-full)
+- Install texlive-full
 
 ## Get started
 
