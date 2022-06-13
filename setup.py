@@ -12,7 +12,6 @@ def package_files(directory):
 
 
 extra_files = package_files('ecldoc/Templates')
-
 setup(
     name="ecldoc",
     version="1.0",
