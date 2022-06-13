@@ -6,7 +6,7 @@ import subprocess
 import time
 
 from lxml import etree
-from markdown import markdown
+import markdown
 from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
 from weasyprint import HTML
@@ -14,6 +14,7 @@ from PyPDF2 import PdfMerger
 ##############################################################
 
 from ecldoc.Constants import TEMPLATE_DIR
+from ecldoc.markdown2latex import LaTeXExtension
 TEX_TEMPLATE_DIR = joinpath(TEMPLATE_DIR, 'tex')
 
 ##############################################################
@@ -214,6 +215,25 @@ class GenTEX(object) :
 
             render = self.toc_template.render(name=key, files=childfiles, bundle=bundle,
                                             label=tex_relpath, up=dirname(tex_relpath))
+            if key == "root":
+                end_of_toc = "\end{longtable}\n}"
+                render_temp = render.split(end_of_toc)
+                readme_md_path = joinpath(self.input_root, 'README.md')
+                readme_data_in_markdown = read_file(readme_md_path)
+                md = markdown.Markdown()
+                mkdn2latex = LaTeXExtension()
+                mkdn2latex.extendMarkdown(md, markdown.__dict__)
+                render = """
+                {render_temp_start}
+                {end_of_toc}
+                \n\n{readme}
+                {render_temp_end}
+                """.format(
+                    render_temp_start=render_temp[0],
+                    render_temp_end=render_temp[1], 
+                    end_of_toc=end_of_toc,
+                    readme=md.convert(readme_data_in_markdown).replace("</div>", "")
+                ).strip()
             write_to_file(render_path, render)
 
             render = self.toc_template.render(name=key,
@@ -250,29 +270,6 @@ class GenTEX(object) :
         process = subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
         process.check_returncode()
 
-        readme_pdf_path = joinpath(self.tex_path, 'readme.pdf')
-        index_pdf_path = joinpath(self.tex_path, 'index.pdf')
-        merged_pdf_path = joinpath(self.tex_path, 'new-index.pdf')
-        readme_md_path = joinpath(self.input_root, 'README.md')
-
-
-        # Render Readme.md inside readme.pdf
-        readme_data_in_markdown = read_file(readme_md_path)
-        readme_in_html = markdown(readme_data_in_markdown)
-        index_file = open(readme_pdf_path, "wb")
-        HTML(string = readme_in_html).write_pdf(target = index_file)
-        index_file.close()
-
-        # combine index.pdf and readme.pdf
-        pdf_merger = PdfMerger()
-        pdf_merger.append(joinpath(self.tex_path, 'index.pdf'))
-        pdf_merger.append(readme_pdf_path)
-        pdf_merger.write(joinpath(self.tex_path, 'new-index.pdf'))
-        pdf_merger.close()
-
-        os.remove(index_pdf_path)
-        os.remove(readme_pdf_path)
-        os.rename(merged_pdf_path, index_pdf_path)
 
 
 
