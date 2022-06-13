@@ -10,4 +10,8 @@
 ehthumbs.db
 Thumbs.db
 .vscode
+build/*
+ecldoc.egg-info
+ecldoc-**.tar.gz
+
 

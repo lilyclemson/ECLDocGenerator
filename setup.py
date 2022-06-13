@@ -14,7 +14,7 @@ def package_files(directory):
 extra_files = package_files('ecldoc/Templates')
 setup(
     name="ecldoc",
-    version="1.0",
+    version="1.0.2",
     packages=find_packages(),
     install_requires=[
         'Jinja2==2.9.6',
@@ -40,6 +40,7 @@ setup(
         "webencodings==0.5.1",
     ],
     package_data={'': extra_files},
-    scripts=['bin/ecldoc']
+    scripts=['bin/ecldoc'],
+    url="https://github.com/lilyclemson/ECLDocGenerator",
 )
 
