@@ -13,5 +13,5 @@ Thumbs.db
 build/*
 ecldoc.egg-info
 ecldoc-**.tar.gz
-
-
+dist/
+textput.log
