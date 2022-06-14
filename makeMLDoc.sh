@@ -14,19 +14,19 @@ ecldoc --iroot ~/source/PBblas --oroot ~/docs/PBblas --eclcc=" -I ~/source" --ex
 ecldoc --iroot ~/source/LearningTrees --oroot ~/docs/LearningTrees --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "internal/*.ecl,test/*.ecl,test/datasets/*.ecl" --hideInternal
 
 # LogisticRegression
-ecldoc --iroot ~/source/LogisticRegression --oroot ~/docs/LogisticRegression --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml --format "html,pdf" --exclude "IRLS/*.ecl,performance/*.ecl,validation/*.ecl" --hideInternal
+ecldoc --iroot ~/source/LogisticRegression --oroot ~/docs/LogisticRegression --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "IRLS/*.ecl,performance/*.ecl,validation/*.ecl" --hideInternal
 
 # LinearRegression
-ecldoc --iroot ~/source/LinearRegression --oroot ~/docs/LinearRegression --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "performance/*.ecl,test/*.ecl,test/Datasets/*.ecl,test/Utils/*.ecl" --hideInternal
+ecldoc --iroot ~/source/LinearRegression --oroot ~/docs/LinearRegression --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "performance/*.ecl,test/*.ecl,test/Datasets/*.ecl,test/Utils/*.ecl" --hideInternal
 
 # GLM
-ecldoc --iroot ~/source/GLM --oroot ~/docs/GLM --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "performance/*.ecl,validation/*.ecl, IRLS/*.ecl,Datasets/*.ecl" --hideInternal
+ecldoc --iroot ~/source/GLM --oroot ~/docs/GLM --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "performance/*.ecl,validation/*.ecl, IRLS/*.ecl,Datasets/*.ecl" --hideInternal
 
 # SupportVectorMachines
-ecldoc --iroot ~/source/SupportVectorMachines --oroot ~/docs/SupportVectorMachines --eclcc=" -I ~/source" --exdocpaths "docs/ML_Core/xml" --format "html,pdf" --exclude "Performance/*.ecl,Validation/*.ecl, Datasets/*.ecl, Examples/*.ecl, libsvm/*.ecl" --hideInternal
+ecldoc --iroot ~/source/SupportVectorMachines --oroot ~/docs/SupportVectorMachines --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "Performance/*.ecl,Validation/*.ecl, Datasets/*.ecl, Examples/*.ecl, libsvm/*.ecl" --hideInternal
 
 # KMeans
-ecldoc --iroot ~/source/KMeans --oroot ~/docs/KMeans --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "test/*.ecl,test/datasets/*.ecl, test/Performance/*.ecl, test/Validation/*.ecl" --hideInternal
+ecldoc --iroot ~/source/KMeans --oroot ~/docs/KMeans --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "test/*.ecl,test/datasets/*.ecl, test/Performance/*.ecl, test/Validation/*.ecl" --hideInternal
 
 # TextVectors
 ecldoc --iroot ~/source/TextVectors --oroot ~/docs/TextVectors --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "internal/*.ecl,test/*.ecl" --hideInternal
