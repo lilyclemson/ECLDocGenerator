@@ -13,8 +13,8 @@ def package_files(directory):
 
 extra_files = package_files('ecldoc/Templates')
 setup(
-    name="ecldoc",
-    version="1.0.2",
+    name='ecldoc',
+    version='1.0.3',
     packages=find_packages(),
     install_requires=[
         'Jinja2==2.9.6',
