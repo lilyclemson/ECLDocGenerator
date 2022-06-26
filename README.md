@@ -8,6 +8,8 @@ Ecldoc is a tool for generating API Documentation for ECL Project based on their
 - Install pip3, setuptools
 - Install texlive-full
 
+- Install make
+
 ## Get started
 
 If you are on Windows, please make sure to follow [windows guidelines](docs/windows.md#windows) too.
@@ -18,3 +20,4 @@ If you are on Windows, please make sure to follow [windows guidelines](docs/wind
 
 Or you can install through pip:
 - pip3 install https://github.com/lilyclemson/ECLDocGenerator
+- pip3 install ecldoc

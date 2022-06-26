@@ -11,13 +11,12 @@ from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
 from weasyprint import HTML
 from PyPDF2 import PdfMerger
-##############################################################
 
 from ecldoc.Constants import TEMPLATE_DIR
 from ecldoc.markdown2latex import LaTeXExtension
+
 TEX_TEMPLATE_DIR = joinpath(TEMPLATE_DIR, 'tex')
 
-##############################################################
 
 import jinja2
 latex_jinja_env = jinja2.Environment(
@@ -51,7 +50,6 @@ def escape_tex(value):
 
 latex_jinja_env.filters['escape_tex'] = escape_tex
 
-###############################################################
 
 from ecldoc.parseDoc import getTags
 from ecldoc.Taglets import taglets
@@ -240,8 +238,6 @@ class GenTEX(object) :
             start_path = relpath(temptoc_render_path, self.tex_path)
             render = self.index_template.render(root=start_path)
             write_to_file(index_render_path, render)
-
-
             subprocess.run(['pdflatex ' +
                             '-output-directory ' + relpath(content_root, self.tex_path) + ' ' +
                             relpath(index_render_path, self.tex_path)],
@@ -253,7 +249,6 @@ class GenTEX(object) :
         '''
         Main Function called by ECLDOC
         '''
-        # import pdb; pdb.set_trace()
         print("\nGenerating PDF Documentation ... ")
         self.gen('root', self.ecl_file_tree, self.tex_root)
 
@@ -262,8 +257,7 @@ class GenTEX(object) :
         render = self.index_template.render(root=start_path)
         write_to_file(joinpath(self.tex_path, 'index.tex'), render)
 
-        process = subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
-        process.check_returncode()
+        subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
 
 
 
