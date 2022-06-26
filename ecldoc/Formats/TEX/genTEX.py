@@ -216,23 +216,18 @@ class GenTEX(object) :
             render = self.toc_template.render(name=key, files=childfiles, bundle=bundle,
                                             label=tex_relpath, up=dirname(tex_relpath))
             if key == "root":
-                end_of_toc = "\end{longtable}\n}"
+                end_of_toc = "\\end{tabularx}\n\n"
                 render_temp = render.split(end_of_toc)
                 readme_md_path = joinpath(self.input_root, 'README.md')
                 readme_data_in_markdown = read_file(readme_md_path)
                 md = markdown.Markdown()
                 mkdn2latex = LaTeXExtension()
                 mkdn2latex.extendMarkdown(md, markdown.__dict__)
-                render = """
-                {render_temp_start}
-                {end_of_toc}
-                \n\n{readme}
-                {render_temp_end}
-                """.format(
+                render = """{render_temp_start}{end_of_toc}{readme}\n\n{render_temp_end}""".format(
                     render_temp_start=render_temp[0],
                     render_temp_end=render_temp[1], 
                     end_of_toc=end_of_toc,
-                    readme=md.convert(readme_data_in_markdown).replace("</div>", "")
+                    readme=md.convert(readme_data_in_markdown).replace("</div>", "").replace("<div>", "")
                 ).strip()
             write_to_file(render_path, render)
 
