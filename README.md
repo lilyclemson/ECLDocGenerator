@@ -19,5 +19,4 @@ If you are on Windows, please make sure to follow [windows guidelines](docs/wind
 - Else Run : ``make install`` (add default pip3 installation directory to $PATH env variable - most commonly $HOME/.local/bin)
 
 Or you can install through pip:
-- pip3 install https://github.com/lilyclemson/ECLDocGenerator
 - pip3 install ecldoc
