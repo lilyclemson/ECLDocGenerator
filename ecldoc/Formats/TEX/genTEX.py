@@ -218,6 +218,7 @@ class GenTEX(object) :
                 render_temp = render.split(end_of_toc)
                 readme_md_path = joinpath(self.input_root, 'README.md')
                 readme_data_in_markdown = read_file(readme_md_path)
+                readme_data_in_markdown = "# OVERVIEW\n" + readme_data_in_markdown
                 md = markdown.Markdown()
                 mkdn2latex = LaTeXExtension()
                 mkdn2latex.extendMarkdown(md, markdown.__dict__)
