@@ -18,7 +18,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Jinja2==2.9.6',
-        'lxml==3.8.0',
+        'lxml==4.9.0',
         "importlib-metadata==4.8.3",
         "markdown==3.3.7",
         "typing-extensions==4.1.1",
