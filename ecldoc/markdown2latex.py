@@ -133,15 +133,9 @@ class LaTeXTreeProcessor(markdown.treeprocessors.Treeprocessor):
 
         if ournode.tag == 'h1':
             if "OVERVIEW" in subcontent:
-                buffer += """
-\\begin{center}
-    \\LARGE\\textbf{%s}\\
-\\end{center}""".strip() % subcontent
+                buffer += """\\LARGE\\textbf{%s}\\newline\\newline""".strip() % subcontent
             else: 
-                 buffer += """
-\\begin{center}
-    \\large\\textbf{%s}\\
-\\end{center}""".strip() % subcontent
+                buffer += """\\large\\textbf{%s}\\newline""".strip() % subcontent
         elif ournode.tag == 'h2':
             buffer += '\n\n\\section{%s}\n' % subcontent
         elif ournode.tag == 'h3':
