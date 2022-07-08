@@ -3,15 +3,16 @@ import re
 import subprocess
 
 from lxml import etree
-from ecldoc.Utils import write_to_file
+from markdown import markdown
+from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
 
-##############################################################
+
 
 from ecldoc.Constants import TEMPLATE_DIR
 TEX_TEMPLATE_DIR = joinpath(TEMPLATE_DIR, 'tex')
 
-##############################################################
+
 
 import jinja2
 latex_jinja_env = jinja2.Environment(
@@ -216,6 +217,7 @@ class GenTEX(object) :
                                             bundle=bundle, label=tex_relpath, up="")
             write_to_file(temptoc_render_path, render)
 
+            # Render index.pdf
             start_path = relpath(temptoc_render_path, self.tex_path)
             render = self.index_template.render(root=start_path)
             write_to_file(index_render_path, render)

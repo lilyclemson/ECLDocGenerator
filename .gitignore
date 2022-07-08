@@ -15,3 +15,4 @@ ecldoc.egg-info
 ecldoc-**.tar.gz
 dist/
 textput.log
+build/
