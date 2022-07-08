@@ -4,6 +4,10 @@ from lxml import etree
 import lxml.html as H
 from collections import defaultdict
 
+<<<<<<< HEAD
+=======
+from ecldoc.Constants import OPTIONS
+>>>>>>> Add debug flag
 tags = [
     'param',
 'field',
@@ -14,7 +18,11 @@ tags = [
 'firstline',
 'inherit',
 'generaltag',
+<<<<<<< HEAD
 ]    
+=======
+]                    
+>>>>>>> Add debug flag
 def parseDocstring(docstring) :
     '''
     Parse Docstring as returned by eclcc,
@@ -23,7 +31,10 @@ def parseDocstring(docstring) :
     '''
     tags_re = "|".join(tags)
     docstring = re.sub(r'([@])\s+({0})'.format(tags_re), r'\1' + r'\2', docstring)
+<<<<<<< HEAD
 
+=======
+>>>>>>> Add debug flag
     docstring = re.sub(r'\n\s*\*', '\n', docstring)
     docstring = re.sub(r'\r', ' ', docstring)
     docstring = docstring.strip().split('\n')
@@ -139,11 +150,16 @@ def construct_type(ele) :
 
     return typestring
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Add debug flag
 def cleansign(text) :
     '''
     Remove irrelevant prefix and suffixes from signature
     '''
-    print('cleansign in = "', text, '"')
+    if OPTIONS["DEBUG"]:
+        print('cleansign in = "', text, '"')
     endpos = text.rfind(':=');
     if endpos >= 0:
       text = text[:endpos]
@@ -151,7 +167,8 @@ def cleansign(text) :
     text = re.sub(r'^shared', '', text, flags=re.I)
     text = re.sub(r';$', '', text, flags=re.I)
     text = re.sub(r'\s+', ' ', text.strip())
-    print('cleansign out = ', text)
+    if OPTIONS["DEBUG"]:
+        print('cleansign out = ', text)
     return text
 
 def breaksign(name, text) :
@@ -159,7 +176,8 @@ def breaksign(name, text) :
     Heuristically break signature of ECL Definition
     recovered from ecl file into "return name (Paramters)"
     '''
-    print('breaksign line = ', name, text)
+    if OPTIONS["DEBUG"]:
+        print('breaksign line = ', name, text)
     name = name.lower()
     string = ' ' + text.lower() + ' '
     pos = 1

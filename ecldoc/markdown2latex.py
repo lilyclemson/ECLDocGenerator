@@ -1,3 +1,4 @@
+from pydoc import doc
 import re
 import markdown
 import xml.dom.minidom
