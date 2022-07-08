@@ -36,7 +36,8 @@
 \par
 \begin{description}
 \BLOCK{ for t in tuples }
-\item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \textbf{\VAR{t[0]|escape_tex}} <\VAR{t[1]|escape_tex}>
+\item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}]
+\hyperlink{ecldoc:\VAR{t[0].lower()}}{\VAR{t[0].split('.')[-1].upper() | escape_tex}} 
 \BLOCK{ endfor }
 \end{description}
 \BLOCK{ endif }
