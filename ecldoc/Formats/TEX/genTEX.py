@@ -3,7 +3,6 @@ import re
 import subprocess
 
 from lxml import etree
-from markdown import markdown
 from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
 
