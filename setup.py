@@ -27,7 +27,7 @@ setup(
         'webencodings==0.5.1',
         'zopfli==0.1.9',
         'CairoSVG==2.5.2',
-        'Pillow==8.4.0',
+        'Pillow==8.0.0',
         'Pyphen==0.11.0',
         'cffi==1.15.0',
         'cssselect2==0.4.1',

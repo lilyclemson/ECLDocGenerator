@@ -9,8 +9,6 @@ from lxml import etree
 import markdown
 from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
-from weasyprint import HTML
-from PyPDF2 import PdfMerger
 
 from ecldoc.Constants import TEMPLATE_DIR
 from ecldoc.markdown2latex import LaTeXExtension
