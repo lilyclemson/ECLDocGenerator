@@ -4,9 +4,9 @@ import os
 import re
 import subprocess
 import time
-import markdown
 
 from lxml import etree
+import markdown
 from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
 
@@ -14,6 +14,7 @@ from ecldoc.Constants import TEMPLATE_DIR
 from ecldoc.markdown2latex import LaTeXExtension
 
 TEX_TEMPLATE_DIR = joinpath(TEMPLATE_DIR, 'tex')
+
 
 import jinja2
 latex_jinja_env = jinja2.Environment(
@@ -210,6 +211,8 @@ class GenTEX(object) :
 
             render = self.toc_template.render(name=key, files=childfiles, bundle=bundle,
                                             label=tex_relpath, up=dirname(tex_relpath))
+
+            render = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '')
             if key == "root":
                 end_of_toc = "\\end{tabularx}\n\n"
                 render_temp = render.split(end_of_toc)
@@ -219,22 +222,29 @@ class GenTEX(object) :
                 md = markdown.Markdown()
                 mkdn2latex = LaTeXExtension()
                 mkdn2latex.extendMarkdown(md, markdown.__dict__)
+                readmeLatexContent = md.convert(readme_data_in_markdown).replace("</div>", "").replace("<div>", "")
+                print(readme_data_in_markdown)
+                print(readmeLatexContent)
                 render = """{render_temp_start}{end_of_toc}{readme}\n\n{render_temp_end}""".format(
                     render_temp_start=render_temp[0],
                     render_temp_end=render_temp[1], 
                     end_of_toc=end_of_toc,
-                    readme=md.convert(readme_data_in_markdown).replace("</div>", "").replace("<div>", "")
+                    readme= readmeLatexContent
                 ).strip()
             write_to_file(render_path, render)
 
             render = self.toc_template.render(name=key,
                                             files=[x for x in childfiles if x['type'] == 'file'],
                                             bundle=bundle, label=tex_relpath, up="")
+            
+            render = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '')
             write_to_file(temptoc_render_path, render)
 
             # Render index.pdf
             start_path = relpath(temptoc_render_path, self.tex_path)
             render = self.index_template.render(root=start_path)
+
+            render = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '')
             write_to_file(index_render_path, render)
             subprocess.run(['pdflatex ' +
                             '-output-directory ' + relpath(content_root, self.tex_path) + ' ' +
@@ -253,6 +263,8 @@ class GenTEX(object) :
         render_path = joinpath(self.tex_root, 'pkg.toc.tex')
         start_path = relpath(render_path, self.tex_path)
         render = self.index_template.render(root=start_path)
+
+        render = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '')
         write_to_file(joinpath(self.tex_path, 'index.tex'), render)
 
         subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
