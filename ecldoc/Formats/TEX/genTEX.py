@@ -4,6 +4,7 @@ import os
 import re
 import subprocess
 import time
+import markdown
 
 from lxml import etree
 from ecldoc.Utils import read_file, write_to_file
