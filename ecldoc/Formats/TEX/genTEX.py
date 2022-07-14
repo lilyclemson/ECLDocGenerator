@@ -215,7 +215,7 @@ class GenTEX(object) :
             render = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '')
             if key == "root":
                 end_of_toc = "\\end{tabularx}\n\n"
-                render_temp = render.split(end_of_toc)
+                render_temp = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '').split(end_of_toc)
                 readme_md_path = joinpath(self.input_root, 'README.md')
                 readme_data_in_markdown = read_file(readme_md_path)
                 readme_data_in_markdown = "# OVERVIEW\n" + readme_data_in_markdown
