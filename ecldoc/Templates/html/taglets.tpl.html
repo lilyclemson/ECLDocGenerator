@@ -45,16 +45,38 @@
 </div>
 {%- endmacro %}
 
+
+{%- macro seetag(name, tuples, libNames)  %}
+<div class="row">
+	<div class="col-md-1 doc-type">{{ name }}</div>
+	<div class="col-md-11" style="padding-left: 0px;">
+		<table class="table">
+			{% for t in tuples %}
+			<tr>
+				<td>
+					{{ t[0] }}
+				</td>
+			</tr>
+			{%- endfor %}
+		</table>
+	</div>
+</div>
+{%- endmacro %}
+
 {% macro parenttag(name, tuples) %}
 <div class="row">
 <div class="col-md-1 doc-type">{{ name }}</div>
 <div class="col-md-11" style="padding-left: 0px;">
 <ul class="pagination" style="margin-top: 0px;">
-	{%- for t in tuples -%}
+	{% for t in tuples %}
 	<li>
-		<a href="{{ t[1] }}">
-			{{ t[0] }}
+		{% if t[0].split('.')[0] in libNames %}
+		<a href="./{{ t[0].split('.')[0] }}.pdf">
+			{{ t[0].split('.')[0] }}
 		</a>
+		{% else %}
+			{{ t[0] }}
+		{% endif %}
 	</li>
 	{%- endfor -%}
 </ul>
