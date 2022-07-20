@@ -26,7 +26,10 @@ def parseDocstring(docstring):
     '''
     tags_re = "|".join(tags)
     docstring = re.sub(
-        r'([@])\s+({0})'.format(tags_re), r'\1' + r'\2', docstring)
+        r'([@])\s+({0})'.format(tags_re), 
+        r'\1' + r'\2', 
+        docstring
+    )
     docstring = re.sub(r'\n\s*\*', '\n', docstring)
     docstring = re.sub(r'\r', ' ', docstring)
     docstring = docstring.strip().split('\n')
