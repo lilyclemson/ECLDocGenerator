@@ -28,8 +28,6 @@ def render_return(tag_return) :
     return tag_template.render(render_name='twotag', args=['Returns', return_tuple])
 
 def render_see(tag_see) :
-    render = tag_template.render(render_name='onetag', args=['See', tag_see.tuples['tuples']])
-
     libraries = [
         'GNN',       
         'KMeans',    
@@ -43,16 +41,10 @@ def render_see(tag_see) :
         'PBblas',   
         'TextVectors'
     ]
-    for lib in libraries:
-        for tuple in tag_see.tuples['tuples']:
-            for st in tuple:
-                if lib in st:
-                    render = render.replace(
-                        st,
-                        "<a href=\"https://cdn.hpccsystems.com/pdf/ml/" + lib + ".pdf\">" + st + "</a>"
-                    )
-                    is_found = True
-                    break   
+
+    render = tag_template.render(render_name='seetag', args=[
+                                 'See', tag_see.tuples['tuples'], libraries])
+
     return render
 
 def render_parent(tag_parent) :
