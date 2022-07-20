@@ -3,7 +3,6 @@ import re
 from lxml import etree
 import lxml.html as H
 from collections import defaultdict
-
 tags = [
     'param',
 'field',
@@ -14,7 +13,7 @@ tags = [
 'firstline',
 'inherit',
 'generaltag',
-]    
+]                    
 def parseDocstring(docstring) :
     '''
     Parse Docstring as returned by eclcc,
@@ -23,7 +22,6 @@ def parseDocstring(docstring) :
     '''
     tags_re = "|".join(tags)
     docstring = re.sub(r'([@])\s+({0})'.format(tags_re), r'\1' + r'\2', docstring)
-
     docstring = re.sub(r'\n\s*\*', '\n', docstring)
     docstring = re.sub(r'\r', ' ', docstring)
     docstring = docstring.strip().split('\n')
@@ -138,6 +136,7 @@ def construct_type(ele) :
         typestring += ' ( ' + construct_type(ele.find('./Type')) + ' )'
 
     return typestring
+
 
 def cleansign(text) :
     '''

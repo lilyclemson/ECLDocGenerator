@@ -1,4 +1,8 @@
 #!/bin/sh
+# Re-install
+make uninstall
+make install
+
 # Generate each bundle's documentation
 
 # ML_Core

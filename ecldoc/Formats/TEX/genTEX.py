@@ -1,19 +1,16 @@
-from ntpath import join
-from operator import index
 import os
 import re
 import subprocess
-import time
-import markdown
 
 from lxml import etree
+
+import markdown
 from ecldoc.Utils import read_file, write_to_file
 from ecldoc.Utils import joinpath, relpath, dirname
-
 from ecldoc.Constants import TEMPLATE_DIR
 from ecldoc.markdown2latex import LaTeXExtension
-
 TEX_TEMPLATE_DIR = joinpath(TEMPLATE_DIR, 'tex')
+
 
 import jinja2
 latex_jinja_env = jinja2.Environment(
@@ -58,6 +55,8 @@ class ParseTEX(object) :
     from its XML Repr
     '''
     def __init__(self, generator, ecl_file) :
+        self.parseDocName = generator.input_root.split("/")[-1]
+        self.ecl_filepath = ecl_file
         self.xml_file = joinpath(generator.xml_root, ecl_file + '.xml')
         self.tex_file = joinpath(generator.tex_root, ecl_file + '.tex')
 
@@ -131,10 +130,10 @@ class ParseTEX(object) :
                     assert False, 'Taglet not found for required tags (content, firstline)'
                 if 'generaltag' in tag_renders :
                     render = tag_renders['generaltag'](
-                                taglets['generaltag'](doc=tags[tag], defn=defn, tagname=tag))
+                                taglets['generaltag'](doc=tags[tag], defn=defn, tagname=tag, docName = self.parseDocName))
                     renders[tag] = render
                 continue
-            render = tag_renders[tag](taglets[tag](doc=tags[tag], defn=defn, tagname=tag))
+            render = tag_renders[tag](taglets[tag](doc=tags[tag], defn=defn, tagname=tag, docName = self.parseDocName, ecl_file_path = self.ecl_filepath))
             renders[tag] = render
 
         renders['inherit'] = tag_renders['inherit'](defn.attrib['inherittype'])
@@ -210,20 +209,25 @@ class GenTEX(object) :
 
             render = self.toc_template.render(name=key, files=childfiles, bundle=bundle,
                                             label=tex_relpath, up=dirname(tex_relpath))
+
             if key == "root":
-                end_of_toc = "\\end{tabularx}\n\n"
+                end_of_toc = "\end{longtable}\n}"
                 render_temp = render.split(end_of_toc)
                 readme_md_path = joinpath(self.input_root, 'README.md')
                 readme_data_in_markdown = read_file(readme_md_path)
-                readme_data_in_markdown = "# OVERVIEW\n" + readme_data_in_markdown
                 md = markdown.Markdown()
                 mkdn2latex = LaTeXExtension()
                 mkdn2latex.extendMarkdown(md, markdown.__dict__)
-                render = """{render_temp_start}{end_of_toc}{readme}\n\n{render_temp_end}""".format(
+                render = """
+                {render_temp_start}
+                {end_of_toc}
+                \n\n{readme}
+                {render_temp_end}
+                """.format(
                     render_temp_start=render_temp[0],
                     render_temp_end=render_temp[1], 
                     end_of_toc=end_of_toc,
-                    readme=md.convert(readme_data_in_markdown).replace("</div>", "").replace("<div>", "")
+                    readme=md.convert(readme_data_in_markdown).replace("</div>", "")
                 ).strip()
             write_to_file(render_path, render)
 
@@ -232,10 +236,10 @@ class GenTEX(object) :
                                             bundle=bundle, label=tex_relpath, up="")
             write_to_file(temptoc_render_path, render)
 
-            # Render index.pdf
             start_path = relpath(temptoc_render_path, self.tex_path)
             render = self.index_template.render(root=start_path)
             write_to_file(index_render_path, render)
+
             subprocess.run(['pdflatex ' +
                             '-output-directory ' + relpath(content_root, self.tex_path) + ' ' +
                             relpath(index_render_path, self.tex_path)],

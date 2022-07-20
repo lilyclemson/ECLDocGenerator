@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 import os
 
 
+
 def package_files(directory):
     paths = []
     for (path, directories, filenames) in os.walk(directory):
@@ -14,8 +15,8 @@ def package_files(directory):
 extra_files = package_files('ecldoc/Templates')
 print(extra_files)
 setup(
-    name="ecldoc",
-    version="1.0.3",
+    name='ecldoc',
+    version='1.0.3',
     packages=find_packages(),
     install_requires=[
         'Jinja2==2.9.6',
@@ -42,6 +43,6 @@ setup(
     ],
     package_data={'': extra_files},
     scripts=['bin/ecldoc'],
-    url="https://github.com/lilyclemson/ECLDocGenerator",
+    url='https://github.com/lilyclemson/ECLDocGenerator',
 )
 
