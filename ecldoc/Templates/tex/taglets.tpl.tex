@@ -42,6 +42,21 @@
 \BLOCK{ endif }
 \BLOCK{ endmacro }
 
+\BLOCK{ macro seetag(name, tuples, libNames) }
+\BLOCK{ if tuples|length > 0 }
+\par
+\begin{description}
+\BLOCK{ for t in tuples }
+\BLOCK{ if t[0].split('.')[0] in libNames }
+\item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}]\href{https://cdn.hpccsystems.com/pdf/ml/\VAR{t[0].split('.')[0]}.pdf}{\VAR{t[0].split('.')[0]}}.\VAR{'.'.join(t[0].split('.')[1: ])}
+\BLOCK{ else }
+\item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \hyperlink{ecldoc:\VAR{t[0].lower()}}{\VAR{t[0] | escape_tex}}
+\BLOCK{ endif }
+\BLOCK{ endfor }
+\end{description}
+\BLOCK{ endif }
+\BLOCK{ endmacro }
+
 \BLOCK{ macro contenttag(lines) }
 \BLOCK{ for line in lines }
 \VAR{ line }
