@@ -236,7 +236,7 @@ class GenTEX(object) :
             render = self.toc_template.render(name=key,
                                             files=[x for x in childfiles if x['type'] == 'file'],
                                             bundle=bundle, label=tex_relpath, up="")
-
+            
             render = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '')
             write_to_file(temptoc_render_path, render)
 
