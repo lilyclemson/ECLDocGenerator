@@ -59,17 +59,17 @@ cp -f ~/docs/GNN/tex/index.pdf ~/share/Publish/GNN.pdf
 cp -f ~/docs/dbscan/tex/index.pdf ~/share/Publish/dbscan.pdf
 cp -f ~/docs/HPCC_Causality/tex/index.pdf ~/share/Publish/HPCC_Causality.pdf
 
-mkdir Publish
+mkdir ~/Publish
 
-cp -f ~/docs/ML_Core/tex/index.pdf ./Publish/ML_Core.pdf
-cp -f ~/docs/PBblas/tex/index.pdf ./Publish/PBblas.pdf
-cp -f ~/docs/LinearRegression/tex/index.pdf ./Publish/LinearRegression.pdf
-cp -f ~/docs/LogisticRegression/tex/index.pdf ./Publish/LogisticRegression.pdf
-cp -f ~/docs/LearningTrees/tex/index.pdf ./Publish/LearningTrees.pdf
-cp -f ~/docs/GLM/tex/index.pdf ./Publish/GLM.pdf
-cp -f ~/docs/SupportVectorMachines/tex/index.pdf ./Publish/SupportVectorMachines.pdf
-cp -f ~/docs/KMeans/tex/index.pdf ./Publish/KMeans.pdf
-cp -f ~/docs/TextVectors/tex/index.pdf ./Publish/TextVectors.pdf
-cp -f ~/docs/GNN/tex/index.pdf ./Publish/GNN.pdf
-cp -f ~/docs/dbscan/tex/index.pdf ./Publish/dbscan.pdf
-cp -f ~/docs/HPCC_Causality/tex/index.pdf ./Publish/HPCC_Causality.pdf
+cp -f ~/docs/ML_Core/tex/index.pdf ~/Publish/ML_Core.pdf
+cp -f ~/docs/PBblas/tex/index.pdf ~/Publish/PBblas.pdf
+cp -f ~/docs/LinearRegression/tex/index.pdf ~/Publish/LinearRegression.pdf
+cp -f ~/docs/LogisticRegression/tex/index.pdf ~/Publish/LogisticRegression.pdf
+cp -f ~/docs/LearningTrees/tex/index.pdf ~/Publish/LearningTrees.pdf
+cp -f ~/docs/GLM/tex/index.pdf ~/Publish/GLM.pdf
+cp -f ~/docs/SupportVectorMachines/tex/index.pdf ~/Publish/SupportVectorMachines.pdf
+cp -f ~/docs/KMeans/tex/index.pdf ~/Publish/KMeans.pdf
+cp -f ~/docs/TextVectors/tex/index.pdf ~/Publish/TextVectors.pdf
+cp -f ~/docs/GNN/tex/index.pdf ~/Publish/GNN.pdf
+cp -f ~/docs/dbscan/tex/index.pdf ~/Publish/dbscan.pdf
+cp -f ~/docs/HPCC_Causality/tex/index.pdf ~/Publish/HPCC_Causality.pdf
