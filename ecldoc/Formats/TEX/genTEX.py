@@ -236,7 +236,7 @@ class GenTEX(object) :
             start_path = relpath(temptoc_render_path, self.tex_path)
             render = self.index_template.render(root=start_path)
             write_to_file(index_render_path, render)
-            subprocess.run(['pdflatex ' +
+            subprocess.run(['pdflatex --shell-escape ' +
                             '-output-directory ' + relpath(content_root, self.tex_path) + ' ' +
                             relpath(index_render_path, self.tex_path)],
                             cwd=self.tex_path, shell=True)
@@ -255,7 +255,7 @@ class GenTEX(object) :
         render = self.index_template.render(root=start_path)
         write_to_file(joinpath(self.tex_path, 'index.tex'), render)
 
-        subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
+        subprocess.run(['pdflatex --shell-escape index.tex'], cwd=self.tex_path, shell=True)
 
 
 
