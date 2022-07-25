@@ -84,7 +84,7 @@ class ParseTEX(object) :
 
         name = src.attrib['name'].split('.')
         self.parseSource()
-
+        
         render = self.template.render(name=name, src=src, defn_tree=self.defn_tree, up=('toc:'+self.dirname))
         write_to_file(self.tex_file, render)
 
@@ -111,8 +111,7 @@ class ParseTEX(object) :
         '''
         sign = defn.find('Signature')
         doc = self.parseDocs(defn)
-
-        defn_dict = { 'tag' : defn, 'sign' : sign, 'doc' : doc, 'defns' : [] }
+        defn_dict = { 'tag' : defn, 'tag_parent_name': defn.getparent().attrib['name'], 'sign' : sign, 'doc' : doc, 'defns' : [] }
 
         ### Append all Children of current Definition to defn_tree
         for childdefn in defn.findall('Definition') :

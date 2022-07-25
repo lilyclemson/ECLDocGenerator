@@ -60,7 +60,7 @@
 \textbf{Children}
 \begin{enumerate}
 \BLOCK{ for child in def['defns'] }
-\item \hyperlink{ecldoc:\VAR{child.tag.attrib.fullname}}{\VAR{ child.tag.attrib.name|escape_tex }}
+\item \hyperlink{ecldoc:\VAR{child.tag.attrib.fullname}}{\VAR{ child.tag.attrib.name|escape_tex }} (From \VAR{ child.tag_parent_name | escape_tex })
 \BLOCK{ if child.doc['firstline']|length != 0 }
 : \VAR{ child.doc.firstline }
 \BLOCK{ endif }

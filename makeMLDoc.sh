@@ -3,7 +3,8 @@
 make uninstall
 make install
 # Generate each bundle's documentation
-
+make uninstall
+make install
 # ML_Core
 ecldoc --iroot ~/source/ML_Core --oroot ~/docs/ML_Core --format "html,pdf" --hideInternal
 
