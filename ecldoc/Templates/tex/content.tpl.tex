@@ -24,21 +24,20 @@
 
 \section*{\underline{\textsf{DESCRIPTIONS}}}
 \BLOCK{ for def in defn_tree recursive }
-\subsection*{\textsf{\colorbox{headtoc}{\color{white} \VAR{def.tag.attrib['name'].upper()}}
-\VAR{def.tag.attrib.name|escape_tex}}}
+\subsection*{\textsf{\colorbox{headtoc}{\color{white} \VAR{def.tag.attrib['name'].upper()}}}}
 
 \hypertarget{ecldoc:\VAR{def.tag.attrib.fullname}}{}
 \BLOCK{ for anc in def.tag.iterancestors('Definition')|reverse }
-\hspace{0pt} \hyperlink{ecldoc:\VAR{anc.attrib.fullname}}{\VAR{anc.attrib.name}} \textbackslash\VAR{" "}
+\hspace{0pt} \hyperlink{ecldoc:\VAR{anc.attrib.fullname}}{\VAR{anc.attrib.name}} {\VAR{"/"}}
 \BLOCK{ endfor }
 
 {\renewcommand{\arraystretch}{1.5}
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}l|X|}
+\begin{tabularx}{\textwidth\color{see}}{|>{\raggedright\arraybackslash}l|X|}
 \hline
-\hspace{0pt}\mytexttt{\color{red} \VAR{def['sign'].attrib['ret']|escape_tex}} & \textbf{\VAR{def['sign'].attrib['name']|escape_tex}} \\
+\hspace{0pt}\mytexttt{\color{parametertag} \VAR{def['sign'].attrib['ret']|escape_tex}} & \textbf{\VAR{def['sign'].attrib['name']|escape_tex}} \\
 \hline
 \BLOCK{ if def['sign'].attrib['param'] != '' }
-\multicolumn{2}{|>{\raggedright\arraybackslash}X|}{\hspace{0pt}\mytexttt{\color{param} \VAR{def['sign'].attrib['param']|escape_tex}}} \\
+\multicolumn{2}{|>{\raggedright\arraybackslash}X|}{\hspace{0pt}\mytexttt{\color{return} \VAR{ def['sign'].attrib['param']|escape_tex}}} \\
 \hline
 \BLOCK{ endif }
 \end{tabularx}
