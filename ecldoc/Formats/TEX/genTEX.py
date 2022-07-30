@@ -134,7 +134,6 @@ class ParseTEX(object) :
                 continue
             render = tag_renders[tag](taglets[tag](doc=tags[tag], defn=defn, tagname=tag, docName = self.parseDocName, ecl_file_path = self.ecl_filepath))
             renders[tag] = render
-
         renders['inherit'] = tag_renders['inherit'](defn.attrib['inherittype'])
 
         return renders

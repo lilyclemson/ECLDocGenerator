@@ -127,8 +127,8 @@ def render_firstline(tag_firstline):
     text_latex = convertToLatex(tag_firstline.text)
     return text_latex
 
-def render_inherit(tag_inherit) :
-    if tag_inherit == 'local' or tag_inherit == 'override' : return ''
+def render_inherit(tag_inherit):
+    if tag_inherit in ['local', 'override', 'inherited'] : return ''
     render = tag_template.render(render_name='onetag', args=[tag_inherit, [('', )]])
     return render
 
