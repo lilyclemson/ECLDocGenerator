@@ -83,7 +83,7 @@ class ParseTEX(object) :
 
         name = src.attrib['name'].split('.')
         self.parseSource()
-        
+
         render = self.template.render(name=name, src=src, defn_tree=self.defn_tree, up=('toc:'+self.dirname))
         write_to_file(self.tex_file, render)
 
@@ -110,13 +110,32 @@ class ParseTEX(object) :
         '''
         sign = defn.find('Signature')
         doc = self.parseDocs(defn)
-        defn_dict = { 'tag' : defn, 'tag_parent_name': defn.getparent().attrib['name'], 'sign' : sign, 'doc' : doc, 'defns' : [] }
+        target_path = defn.attrib.get('target', '')
+        parent_doc_name = ''
+        path_of_interface = ''
+        if 'ML_Core' in target_path:
+            path_of_interface = target_path.split('ML_Core')[2].replace('/', '.')
+            parent_doc_name = 'ML_Core'
+        elif 'PBblas' in target_path:
+            path_of_interface = target_path.split('PBblas')[2].replace('/', '.')
+            parent_doc_name = 'PBblas'
+        complete_parent_path =  "{0}{1}".format(parent_doc_name, path_of_interface) if parent_doc_name else target_path.replace(".tex", "")
+        
+        defn_dict = { 
+            'tag' : defn, 
+            'parent_doc_name': parent_doc_name, 
+            'path_of_interface': path_of_interface,
+            'complete_parent_path': complete_parent_path or defn.getparent().attrib['name'],
+            'sign' : sign, 
+            'doc' : doc, 
+            'defns' : [] 
+        }
 
         ### Append all Children of current Definition to defn_tree
         for childdefn in defn.findall('Definition') :
             child_dict = self.parseDefinition(childdefn)
             defn_dict['defns'].append(child_dict)
-
+        
         return defn_dict
 
     def parseDocs(self, defn) :
