@@ -44,6 +44,9 @@ ecldoc --iroot ~/source/dbscan --oroot ~/docs/dbscan --eclcc=" -I ~/source" --ex
 # HPCC-Causality
 ecldoc --iroot ~/source/HPCC_Causality --oroot ~/docs/HPCC_Causality --eclcc=" -I ~/source"  --format "html,pdf" --exclude "internal/*.ecl,Test/*.ecl,Test/Causality/*.ecl,Test/Probability/*.ecl,Test/Synth/*.ecl,performance/*.ecl,ecl/*.ecl" --hideInternal
 
+# GaussianProcessRegression
+ecldoc --iroot ~/source/GaussianProcessRegression --oroot ~/docs/GaussianProcessRegression --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "Internal/*.ecl,Test/*.ecl," --hideInternal
+
 # Now we copy the resulting index.pdf files to files in our publish area named correctly for each bundle.
 
 cp -f ~/docs/ML_Core/tex/index.pdf ~/share/Publish/ML_Core.pdf
@@ -58,6 +61,7 @@ cp -f ~/docs/TextVectors/tex/index.pdf ~/share/Publish/TextVectors.pdf
 cp -f ~/docs/GNN/tex/index.pdf ~/share/Publish/GNN.pdf
 cp -f ~/docs/dbscan/tex/index.pdf ~/share/Publish/dbscan.pdf
 cp -f ~/docs/HPCC_Causality/tex/index.pdf ~/share/Publish/HPCC_Causality.pdf
+cp -f ~/docs/GaussianProcessRegression/tex/index.pdf ~/share/Publish/GaussianProcessRegression.pdf
 
 mkdir Publish
 
