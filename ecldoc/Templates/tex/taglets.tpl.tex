@@ -78,11 +78,14 @@
 \par
 \begin{description}
 \BLOCK{ for t in tuples }
-\BLOCK{ if t[0].split('.')[0] in libNames }
-\item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}]\href{run:./\VAR{t[0].split('.')[0]}.pdf}{\VAR{t[0].split('.')[0]}}.\VAR{'.'.join(t[0].split('.')[1: ])}
+\item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}]
+\BLOCK{ for tp in t[0].split(', ') }
+\BLOCK{ if tp.split('.')[0] in libNames }
+\href{run:./\VAR{tp.split('.')[0]}.pdf}{\VAR{tp.split('.')[0]}}.\VAR{'.'.join(tp.split('.')[1: ])}
 \BLOCK{ else }
-\item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \hyperlink{ecldoc:\VAR{t[0].lower()}}{\VAR{t[0] | escape_tex}}
+\hyperlink{ecldoc:\VAR{tp.lower()}}{\VAR{tp | escape_tex}}
 \BLOCK{ endif }
+\BLOCK{ endfor }
 \BLOCK{ endfor }
 \end{description}
 \BLOCK{ endif }
