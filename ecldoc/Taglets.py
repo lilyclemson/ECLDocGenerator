@@ -3,6 +3,8 @@ class tag(object) :
         self.docstrings = kwargs['doc']
         self.defn = kwargs['defn']
         self.tagname = kwargs['tagname'] if 'tagname' in kwargs else 'tag'
+        self.doc_name = kwargs.get('docName', "")
+        self.ecl_file_path = kwargs.get("ecl_file_path", "")
 
 class tag_param(tag) :
     def __init__(self, **kwargs) :
