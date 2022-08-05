@@ -3,8 +3,10 @@
 \par
 \begin{description}
 \BLOCK{ for t in tuples }
-\BLOCK{ if name == "Parameter" }
+\BLOCK{ if name.lower() == "parameter" }
 \item [\colorbox{parametertag}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \textbf{\underline{\VAR{t[0]|escape_tex}}} ||| \VAR{t[1]|escape_tex} --- \VAR{t[2]|escape_tex}
+\BLOCK{ elif name.lower() == "field" }
+\item [\colorbox{field}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \textbf{\underline{\VAR{t[0]|escape_tex}}} ||| \VAR{t[1]|escape_tex} --- \VAR{t[2]|escape_tex}
 \BLOCK{ else }
 \item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \textbf{\underline{\VAR{t[0]|escape_tex}}} ||| \VAR{t[1]|escape_tex} --- \VAR{t[2]|escape_tex}
 \BLOCK{ endif }
@@ -33,8 +35,12 @@
 \par
 \begin{description}
 \BLOCK{ for t in tuples }
-\BLOCK{ if name == "See" }
+\BLOCK{ if name.lower() == "see" }
 \item [\colorbox{see}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \VAR{t[0]|escape_tex}
+\BLOCK{ elif name.lower() == "result" }
+\item [\colorbox{result}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \VAR{t[0]|escape_tex}
+\BLOCK{ elif name.lower() == "value" }
+\item [\colorbox{value}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \VAR{t[0]|escape_tex}
 \BLOCK{ else }
 \item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \VAR{t[0]|escape_tex}
 \BLOCK{ endif }
@@ -48,7 +54,7 @@
 \par
 \begin{description}
 \BLOCK{ for t in tuples }
-\BLOCK{ if name == "Parent" }
+\BLOCK{ if name.lower() == "parent" }
 \item [\colorbox{parent}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \textbf{\VAR{t[0]|escape_tex}} <\VAR{t[1]|escape_tex}>
 \BLOCK{ else }
 \item [\colorbox{tagtype}{\color{white} \textbf{\textsf{\VAR{name.upper()}}}}] \textbf{\VAR{t[0]|escape_tex}} <\VAR{t[1]|escape_tex}>

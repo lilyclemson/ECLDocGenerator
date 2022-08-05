@@ -1,15 +1,13 @@
 \BLOCK{ if name != "root" }
 \chapter*{\color{headtoc} \VAR{name}}
 \BLOCK{ else }
-{\Huge \textbf{MACHINE LEARNING}}\\
-{\Huge \textbf{DOCUMENTATION}}
+{\LARGE \textbf{MACHINE LEARNING DOCUMENTATION}}
 \hfill
 \IfFileExists{HPCC-Logo.png}{%
 }{%
     \immediate\write18{curl -O https://i.postimg.cc/W3wcc8KJ/HPCC-Logo.png}
-
 }
-\includegraphics[scale=.3]{HPCC-Logo.png}\newline
+\includegraphics[scale=.5]{HPCC-Logo.png}\newline
 \BLOCK{ endif } 
 
 \hypertarget{ecldoc:toc:\VAR{label}}{}
