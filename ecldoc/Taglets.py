@@ -3,6 +3,8 @@ class tag(object) :
         self.docstrings = kwargs['doc']
         self.defn = kwargs['defn']
         self.tagname = kwargs['tagname'] if 'tagname' in kwargs else 'tag'
+        self.doc_name = kwargs.get('docName', "")
+        self.ecl_file_path = kwargs.get("ecl_file_path", "")
 
 class tag_param(tag) :
     def __init__(self, **kwargs) :
@@ -18,13 +20,12 @@ class tag_param(tag) :
         params = {p.attrib['name'].lower() : p for p in params}
         gen_params = {}
         for p in broken_ :
-            param_name = p.lower().replace(':', '')
             actual = None
-            if param_name in params :
-                actual = params[param_name].find('Type')
-                del params[param_name]
+            if p.lower() in params :
+                actual = params[p.lower()].find('Type')
+                del params[p.lower()]
 
-            gen_params[param_name] = [broken_[p], actual]
+            gen_params[p.lower()] = [broken_[p], actual]
             self.tuples['tuples'].append((p, broken_[p], actual))
 
         for p in params :

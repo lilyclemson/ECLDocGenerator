@@ -29,6 +29,30 @@ def render_return(tag_return) :
 
 def render_see(tag_see) :
     render = tag_template.render(render_name='onetag', args=['See', tag_see.tuples['tuples']])
+
+    libraries = [
+        'GNN',       
+        'KMeans',    
+        'LinearRegression', 
+        'ML_Core',
+        'SupportVectorMachines',
+        'GLM',     
+        'HPCC_Causality',  
+        'LearningTrees',  
+        'LogisticRegression',  
+        'PBblas',   
+        'TextVectors'
+    ]
+    for lib in libraries:
+        for tuple in tag_see.tuples['tuples']:
+            for st in tuple:
+                if lib in st:
+                    render = render.replace(
+                        st,
+                        "<a href=\"https://cdn.hpccsystems.com/pdf/ml/" + lib + ".pdf\">" + st + "</a>"
+                    )
+                    is_found = True
+                    break   
     return render
 
 def render_parent(tag_parent) :
