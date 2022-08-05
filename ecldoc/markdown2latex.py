@@ -126,24 +126,21 @@ class LaTeXTreeProcessor(markdown.treeprocessors.Treeprocessor):
 
         if ournode.text:
             subcontent += escape_latex_entities(ournode.text)
-
         if list(ournode):
             for child in list(ournode):
                 subcontent += self.tolatex(child)
 
         if ournode.tag == 'h1':
-            buffer += '\n\\title{%s}\n' % subcontent
-            buffer += """
-% ----------------------------------------------------------------
-\maketitle
-% ----------------------------------------------------------------
-"""
+            if "OVERVIEW" in subcontent:
+                buffer += """\\begin{Large}\\textbf{%s}\\end{Large}\\newline\\newline""".strip() % subcontent
+            else: 
+                buffer += """\\begin{large}\\textbf{%s}\\end{large}""".strip() % subcontent
         elif ournode.tag == 'h2':
-            buffer += '\n\n\\section{%s}\n' % subcontent
+            buffer += """\\begin{large}\\textbf{%s}\\end{large}""".strip() % subcontent
         elif ournode.tag == 'h3':
-            buffer += '\n\n\\subsection{%s}\n' % subcontent
+            buffer += """\\begin{normalsize}\\textbf{%s}\\end{normalsize}""".strip() % subcontent
         elif ournode.tag == 'h4':
-            buffer += '\n\\subsubsection{%s}\n' % subcontent
+            buffer += """\\begin{small}\\textbf{%s}\\end{small}""".strip() % subcontent
         elif ournode.tag == 'hr':
             buffer += '\\noindent\makebox[\linewidth]{\\rule{\linewidth}{0.4pt}}'
         elif ournode.tag == 'ul':
@@ -187,7 +184,14 @@ class LaTeXTreeProcessor(markdown.treeprocessors.Treeprocessor):
         elif ournode.tag == 'q':
             buffer += "`%s'" % subcontent.strip()
         elif ournode.tag == 'p':
-            buffer += '\n%s\n' % subcontent.strip()
+            contents = subcontent.split(" ")
+            buffer += '\n'
+            for content in contents:
+                if content.startswith("http"):
+                    buffer += ' \\href{%s}{%s}' % (content,content)
+                else:
+                    buffer += ' %s' % content.strip()
+            buffer += '\n'
         # Footnote processor inserts all of the footnote in a sup tag
         elif ournode.tag == 'sup':
             buffer += '\\footnote{%s}' % subcontent.strip()

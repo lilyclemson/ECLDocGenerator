@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from lib2to3.pgen2.token import OP
 import os
 import glob
 import argparse
@@ -10,6 +11,7 @@ from ecldoc.Utils import split
 
 from ecldoc.genXML import GenXML
 from ecldoc.Formats.generators import generators
+from ecldoc.Constants import OPTIONS
 
 def configParser(configfile) :
     '''
@@ -78,6 +80,7 @@ def argsParserEcldoc(args) :
         options['nointernal'] = args.hideInternal
         options['exdoc_paths'] = split(args.exdocpaths, ',', apply=lambda x : realpath(x))
         options['formats'] = split(args.format, ',', apply=lambda x : x.lower())
+        options['debug'] = args.debug
     return options
 
 def doMain() :
@@ -95,13 +98,19 @@ def doMain() :
     parser.add_argument('--exdocpaths', help="Specify External Documentation paths separated by ','", default='')
     parser.add_argument('--hideNoDoc', help="Hide Definitions with No Documentation", action='store_true', default=False)
     parser.add_argument('--hideInternal', help="Hide Definitions with @internal tag", action='store_true', default=False)
+    parser.add_argument("--debug", help="Run in debug mode.", action='store_true', default=False)
+
 
     args = parser.parse_args()
-    print(args)
+    global OPTIONS
+    OPTIONS["DEBUG"] = args.debug
+    if OPTIONS["DEBUG"]:
+        print(args)
 
     options = argsParserEcldoc(args)
-    print(options)
-
+    if OPTIONS["DEBUG"]:
+        print(options) 
+    
     if options['input_root'] is None :
         print("Input Root Not Found")
         exit(1)
