@@ -1,11 +1,16 @@
+from ast import arg
+from lib2to3.pgen2.token import OP
 import os
 import re
 import json
 import subprocess
 from copy import deepcopy
+from sys import stdout
 
 from lxml import etree
 from lxml.builder import E
+
+from ecldoc.Constants import OPTIONS
 
 from .Utils import genPathTree
 from .Utils import joinpath, relpath, dirname, realpath
@@ -58,13 +63,22 @@ class ParseXML(object):
         ### Run eclcc -M on input_file to generate xmlOriginal doc
         os.makedirs(dirname(self.xml_orig_file), exist_ok=True)
         eclcc_options = ' '.join(self.options['eclcc'])
-        p = subprocess.call(['eclcc -M ' + eclcc_options +
-                             ' -o ' + self.xml_orig_file + ' ' +
-                             self.input_file], shell=True, cwd=self.input_root)
-        print("ECLCC ||| File : ", self.ecl_file, " ||| Output Code : ", p)
+        kargs = {}
+        if not OPTIONS["DEBUG"]:
+            p = subprocess.call(['eclcc -M ' + eclcc_options +
+                            ' -o ' + self.xml_orig_file + ' ' +
+                            self.input_file], shell=True, cwd=self.input_root, stderr=open(os.devnull, 'wb'), stdout=open(os.devnull, 'wb'))
+        else:
+            p = subprocess.call(['eclcc -M ' + eclcc_options +
+                            ' -o ' + self.xml_orig_file + ' ' +
+                            self.input_file], shell=True, cwd=self.input_root)
+
+        if OPTIONS["DEBUG"]:
+            print("ECLCC ||| File : ", self.ecl_file, " ||| Output Code : ", p)
 
         if p > 0 :
-            print("ECLCC Error : Removing file from documentation source tree")
+            if OPTIONS["DEBUG"]:
+                print("ECLCC Error : Removing file from documentation source tree")
             self.internal = True
             return
 
@@ -133,8 +147,9 @@ class ParseXML(object):
     def parseSource(self):
         attribs = self.src.attrib
         srcpath = realpath(attribs['sourcePath'])
-        print('parseSource srcpath = ', srcpath)
-        self.text = read_file(srcpath);
+        if OPTIONS["DEBUG"]:
+            print('parseSource srcpath = ', srcpath)
+        self.text = read_file(srcpath)
 
         ### Append to depend dictionary entry correspong to given file
         ###        for self referential targets
@@ -163,7 +178,8 @@ class ParseXML(object):
             self.src.append(E('Documentation', E('content', ' ')))
 
     def parseDefinition(self, defn):
-        print('parseDefinition defn = ', defn)
+        if OPTIONS["DEBUG"]:
+            print('parseDefinition defn = ', defn)
         attribs = defn.attrib
         self.generateSignature(defn)
 
@@ -199,7 +215,8 @@ class ParseXML(object):
         '''
         attribs = defn.attrib
         name = attribs['name']
-        print('generateSignature name = ', name)
+        if OPTIONS["DEBUG"]:
+            print('generateSignature name = ', name)
         is_scope = 'type' in attribs and attribs['type'] in ['module', 'interface']
         has_params = defn.find('Params') is not None
 
@@ -217,7 +234,6 @@ class ParseXML(object):
                 ### based on fullname, Find that file
                 best_depend = self.matchPath(attribs['fullname'])
                 if best_depend is not None and best_depend != self.src:
-                    print( 'generateSignature fullname = ', best_depend.attrib['sourcePath'])
                     ecl_text = read_file(best_depend.attrib['sourcePath']);
 
         sign = etree.Element('Signature')
@@ -238,8 +254,9 @@ class ParseXML(object):
 
     def parseDocumentation(self, doc):
         content = doc.find('content')
-        #print('parseDocumentation doc = ', etree.tostring(doc))
-        #print('parseDocumentation content = ', etree.tostring(content))
+        if OPTIONS["DEBUG"]:
+            print('parseDocumentation doc = ', etree.tostring(doc))
+            print('parseDocumentation content = ', etree.tostring(content))
         elements = parseDocstring(content.text)
         doc.remove(content)
         ### Append all parsed doctags from docstring as XML Tags
@@ -331,8 +348,12 @@ def parseBundle(generator, ecl_file):
     bundle_xml_path = joinpath(dirpath_xml, 'bundle.xml')
 
     os.makedirs(dirpath_xml_orig, exist_ok=True)
-    p = subprocess.call(['ecl-bundle info ' + dirpath + ' > ' + bundle_orig_path], shell=True)
-    print("ECL-BUNDLE ||| ", "Bundle File : ", dirpath, "Output Code : ", p)
+    if not OPTIONS["DEBUG"]:
+        p = subprocess.call(['ecl-bundle info ' + dirpath + ' > ' + bundle_orig_path], shell=True, stderr=open(os.devnull, 'wb'), stdout=open(os.devnull, 'wb'))
+    else:
+        p = subprocess.call(['ecl-bundle info ' + dirpath + ' > ' + bundle_orig_path], shell=True)
+    if OPTIONS["DEBUG"]:
+        print("ECL-BUNDLE ||| ", "Bundle File : ", dirpath, "Output Code : ", p)
 
     data = read_file(bundle_orig_path).split('\n')
     data = [x.split(':', 1) for x in data]

@@ -6,7 +6,6 @@ import lxml.html as H
 latex_jinja_env.filters['macro'] = call_macro_by_name
 tag_template = latex_jinja_env.get_template(joinpath(TEX_TEMPLATE_DIR, 'taglets.tpl.tex'))
 
-###############################################################
 
 def convertToLatex(html_text) :
     '''
@@ -57,7 +56,6 @@ def parseHTMltoLatex(element) :
 
     return text
 
-###############################################################
 
 def render_param(tag_param) :
     if len(tag_param.tuples['tuples']) == 0 : return ''
@@ -83,6 +81,10 @@ def render_return(tag_return) :
 
 def render_see(tag_see) :
     render = tag_template.render(render_name='onetag', args=['See', tag_see.tuples['tuples']])
+    render = render.replace(
+        "SEE",
+        "\\href{https://cdn.hpccsystems.com/pdf/ml/" + tag_see.doc_name + ".pdf"+ "}" + "{SEE}"
+    )
     return render
 
 def render_parent(tag_parent) :
