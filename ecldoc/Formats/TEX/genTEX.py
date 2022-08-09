@@ -134,7 +134,6 @@ class ParseTEX(object) :
                 continue
             render = tag_renders[tag](taglets[tag](doc=tags[tag], defn=defn, tagname=tag, docName = self.parseDocName, ecl_file_path = self.ecl_filepath))
             renders[tag] = render
-
         renders['inherit'] = tag_renders['inherit'](defn.attrib['inherittype'])
 
         return renders
@@ -219,8 +218,6 @@ class GenTEX(object) :
                 mkdn2latex = LaTeXExtension()
                 mkdn2latex.extendMarkdown(md, markdown.__dict__)
                 readmeLatexContent = md.convert(readme_data_in_markdown).replace("</div>", "").replace("<div>", "")
-                print(readme_data_in_markdown)
-                print(readmeLatexContent)
                 render = """{render_temp_start}{end_of_toc}{readme}\n\n{render_temp_end}""".format(
                     render_temp_start=render_temp[0],
                     render_temp_end=render_temp[1], 
@@ -243,12 +240,12 @@ class GenTEX(object) :
             write_to_file(index_render_path, render)
 
             if not OPTIONS["DEBUG"]:
-                subprocess.run(['pdflatex ' +
+                subprocess.run(['pdflatex --shell-escape ' +
                                 '-output-directory ' + relpath(content_root, self.tex_path) + ' ' +
                                 relpath(index_render_path, self.tex_path)],
                                 cwd=self.tex_path, shell=True, stderr=open(os.devnull, 'wb'), stdout=open(os.devnull, 'wb'))
             else:
-                subprocess.run(['pdflatex ' +
+                subprocess.run(['pdflatex --shell-escape ' +
                                 '-output-directory ' + relpath(content_root, self.tex_path) + ' ' +
                                 relpath(index_render_path, self.tex_path)],
                                 cwd=self.tex_path, shell=True)
@@ -264,10 +261,11 @@ class GenTEX(object) :
         render_path = joinpath(self.tex_root, 'pkg.toc.tex')
         start_path = relpath(render_path, self.tex_path)
         render = self.index_template.render(root=start_path)
+        render = render.replace("<p>", '').replace("</p>", '').replace('<div>', '').replace('</div>', '')
         write_to_file(joinpath(self.tex_path, 'index.tex'), render)
         if not OPTIONS["DEBUG"]:
-            process = subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True, stderr=open(os.devnull, 'wb'), stdout=open(os.devnull, 'wb'))
+            process = subprocess.run(['pdflatex --shell-escape index.tex'], cwd=self.tex_path, shell=True, stderr=open(os.devnull, 'wb'), stdout=open(os.devnull, 'wb'))
             process.check_returncode()
         else: 
-            process = subprocess.run(['pdflatex index.tex'], cwd=self.tex_path, shell=True)
+            process = subprocess.run(['pdflatex --shell-escape index.tex'], cwd=self.tex_path, shell=True)
             process.check_returncode()
