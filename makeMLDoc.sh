@@ -18,7 +18,7 @@ ecldoc --iroot ~/source/PBblas --oroot ~/docs/PBblas --eclcc=" -I ~/source" --ex
 ecldoc --iroot ~/source/LearningTrees --oroot ~/docs/LearningTrees --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "ecl/*.ecl,internal/*.ecl,test/*.ecl,test/datasets/*.ecl" --hideInternal
 
 # LogisticRegression
-ecldoc --iroot ~/source/LogisticRegression --oroot ~/docs/LogisticRegression --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml --format "html,pdf" --exclude "IRLS/*.ecl,performance/*.ecl,validation/*.ecl" --hideInternal
+ecldoc --iroot ~/source/LogisticRegression --oroot ~/docs/LogisticRegression --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "IRLS/*.ecl,performance/*.ecl,validation/*.ecl" --hideInternal
 
 # LinearRegression
 ecldoc --iroot ~/source/LinearRegression --oroot ~/docs/LinearRegression --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "performance/*.ecl,test/*.ecl,test/Datasets/*.ecl,test/Utils/*.ecl" --hideInternal
@@ -39,7 +39,7 @@ ecldoc --iroot ~/source/TextVectors --oroot ~/docs/TextVectors --eclcc=" -I ~/so
 ecldoc --iroot ~/source/GNN --oroot ~/docs/GNN --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "Internal/*.ecl,Test/*.ecl,Test/HARTests/*.ecl" --hideInternal
 
 # DBSCAN
-ecldoc --iroot ~/source/dbscan --oroot ~/docs/dbscan --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "internal/*.ecl,tests/*.ecl,tests/datasets/*.ecl" --hideInternal
+ecldoc --iroot ~/source/dbscan --oroot ~/docs/dbscan --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "OBTTests/*.ecl, OBTTests/ecl/*.ecl, OBTTests/ecl/key/*.ecl,internal/*.ecl,tests/*.ecl,tests/datasets/*.ecl" --hideInternal
 
 # HPCC-Causality
 ecldoc --iroot ~/source/HPCC_Causality --oroot ~/docs/HPCC_Causality --eclcc=" -I ~/source"  --format "html,pdf" --exclude "internal/*.ecl,Test/*.ecl,Test/Causality/*.ecl,Test/Probability/*.ecl,Test/Synth/*.ecl,performance/*.ecl,ecl/*.ecl" --hideInternal
