@@ -15,7 +15,7 @@ ecldoc --iroot ~/source/PBblas --oroot ~/docs/PBblas --eclcc=" -I ~/source" --ex
 # together.  We use the --eclcc and exdocpaths options to do that.
 
 # LearningTrees
-ecldoc --iroot ~/source/LearningTrees --oroot ~/docs/LearningTrees --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "internal/*.ecl,test/*.ecl,test/datasets/*.ecl" --hideInternal
+ecldoc --iroot ~/source/LearningTrees --oroot ~/docs/LearningTrees --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "ecl/*.ecl,internal/*.ecl,test/*.ecl,test/datasets/*.ecl" --hideInternal
 
 # LogisticRegression
 ecldoc --iroot ~/source/LogisticRegression --oroot ~/docs/LogisticRegression --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml --format "html,pdf" --exclude "IRLS/*.ecl,performance/*.ecl,validation/*.ecl" --hideInternal
