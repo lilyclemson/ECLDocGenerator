@@ -37,16 +37,16 @@ ecldoc --iroot ~/source/GLM --oroot ~/docs/GLM --eclcc=" -I ~/source" --exdocpat
 ecldoc --iroot ~/source/SupportVectorMachines --oroot ~/docs/SupportVectorMachines --eclcc=" -I ~/source" --exdocpaths "docs/ML_Core/xml" --format "html,pdf" --exclude "Performance/*.ecl,Validation/*.ecl, Datasets/*.ecl, Examples/*.ecl, libsvm/*.ecl" --hideInternal
 
 # KMeans
-ecldoc --iroot ~/source/KMeans --oroot ~/docs/KMeans --eclcc=" -I ~/source" --exdocpaths docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "test/*.ecl,test/datasets/*.ecl, test/Performance/*.ecl, test/Validation/*.ecl" --hideInternal
+ecldoc --iroot ~/source/KMeans --oroot ~/docs/KMeans --eclcc=" -I ~/source" --exdocpaths ~docs/ML_Core/xml,docs/PBblas/xml --format "html,pdf" --exclude "OBTTests/*.ecl,OBTTests/ecl/*.ecl,OBTTests/ecl/key/*.ecl,Test/*.ecl,Test/datasets/*.ecl, Test/Performance/*.ecl, Test/Validation/*.ecl" --hideInternal
 
 # TextVectors
 ecldoc --iroot ~/source/TextVectors --oroot ~/docs/TextVectors --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "internal/*.ecl,test/*.ecl" --hideInternal
 
 # GNN
-ecldoc --iroot ~/source/GNN --oroot ~/docs/GNN --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "Internal/*.ecl,Test/*.ecl,Test/HARTests/*.ecl" --hideInternal
+ecldoc --iroot ~/source/GNN --oroot ~/docs/GNN --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "OBTTests/*.ecl,OBTTests/ecl/*.ecl,OBTTests/ecl/key/*,Internal/*.ecl,Test/*.ecl,Test/HARTests/*.ecl" --hideInternal
 
 # DBSCAN
-ecldoc --iroot ~/source/dbscan --oroot ~/docs/dbscan --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "OBTTests/*.ecl, OBTTests/ecl/*.ecl, OBTTests/ecl/key/*.ecl,internal/*.ecl,tests/*.ecl,tests/datasets/*.ecl" --hideInternal
+ecldoc --iroot ~/source/dbscan --oroot ~/docs/dbscan --eclcc=" -I ~/source" --exdocpaths ~/docs/ML_Core/xml --format "html,pdf" --exclude "OBTTests/*.ecl,OBTTests/ecl/*.ecl,OBTTests/ecl/key/*.ecl,internal/*.ecl,tests/*.ecl,tests/datasets/*.ecl" --hideInternal
 
 # HPCC-Causality
 ecldoc --iroot ~/source/HPCC_Causality --oroot ~/docs/HPCC_Causality --eclcc=" -I ~/source"  --format "html,pdf" --exclude "internal/*.ecl,Test/*.ecl,Test/Causality/*.ecl,Test/Probability/*.ecl,Test/Synth/*.ecl,performance/*.ecl,ecl/*.ecl" --hideInternal
@@ -72,16 +72,16 @@ cp -f ~/docs/HPCC_Causality/tex/index.pdf ~/share/Publish/HPCC_Causality.pdf
 
 
 
-cp -f ~/docs/ML_Core/tex/index.pdf ./Publish/ML_Core.pdf
-cp -f ~/docs/PBblas/tex/index.pdf ./Publish/PBblas.pdf
-cp -f ~/docs/LinearRegression/tex/index.pdf ./Publish/LinearRegression.pdf
-cp -f ~/docs/LogisticRegression/tex/index.pdf ./Publish/LogisticRegression.pdf
-cp -f ~/docs/LearningTrees/tex/index.pdf ./Publish/LearningTrees.pdf
-cp -f ~/docs/GLM/tex/index.pdf ./Publish/GLM.pdf
-cp -f ~/docs/SupportVectorMachines/tex/index.pdf ./Publish/SupportVectorMachines.pdf
-cp -f ~/docs/KMeans/tex/index.pdf ./Publish/KMeans.pdf
-cp -f ~/docs/TextVectors/tex/index.pdf ./Publish/TextVectors.pdf
-cp -f ~/docs/GNN/tex/index.pdf ./Publish/GNN.pdf
-cp -f ~/docs/dbscan/tex/index.pdf ./Publish/dbscan.pdf
-cp -f ~/docs/HPCC_Causality/tex/index.pdf ./Publish/HPCC_Causality.pdf
-cp -f ~/docs/GaussianProcessRegression/tex/index.pdf ./Publish/GaussianProcessRegression.pdf
+cp -f ~/docs/ML_Core/tex/index.pdf ~/Publish/ML_Core.pdf
+cp -f ~/docs/PBblas/tex/index.pdf ~/Publish/PBblas.pdf
+cp -f ~/docs/LinearRegression/tex/index.pdf ~/Publish/LinearRegression.pdf
+cp -f ~/docs/LogisticRegression/tex/index.pdf ~/Publish/LogisticRegression.pdf
+cp -f ~/docs/LearningTrees/tex/index.pdf ~/Publish/LearningTrees.pdf
+cp -f ~/docs/GLM/tex/index.pdf ~/Publish/GLM.pdf
+cp -f ~/docs/SupportVectorMachines/tex/index.pdf ~/Publish/SupportVectorMachines.pdf
+cp -f ~/docs/KMeans/tex/index.pdf ~/Publish/KMeans.pdf
+cp -f ~/docs/TextVectors/tex/index.pdf ~/Publish/TextVectors.pdf
+cp -f ~/docs/GNN/tex/index.pdf ~/Publish/GNN.pdf
+cp -f ~/docs/dbscan/tex/index.pdf ~/Publish/dbscan.pdf
+cp -f ~/docs/HPCC_Causality/tex/index.pdf ~/Publish/HPCC_Causality.pdf
+cp -f ~/docs/GaussianProcessRegression/tex/index.pdf ~/Publish/GaussianProcessRegression.pdf
