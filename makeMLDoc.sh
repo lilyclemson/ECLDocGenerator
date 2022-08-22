@@ -5,6 +5,13 @@ make install
 # Generate each bundle's documentation
 make uninstall
 make install
+
+# Create project folder under home directory
+mkdir ~/Publish
+mkdir ~/source
+mkdir ~/docs
+
+
 # ML_Core
 ecldoc --iroot ~/source/ML_Core --oroot ~/docs/ML_Core --format "html,pdf" --hideInternal
 
@@ -62,7 +69,8 @@ cp -f ~/docs/GNN/tex/index.pdf ~/share/Publish/GNN.pdf
 cp -f ~/docs/dbscan/tex/index.pdf ~/share/Publish/dbscan.pdf
 cp -f ~/docs/HPCC_Causality/tex/index.pdf ~/share/Publish/HPCC_Causality.pdf
 
-mkdir Publish
+
+
 
 cp -f ~/docs/ML_Core/tex/index.pdf ./Publish/ML_Core.pdf
 cp -f ~/docs/PBblas/tex/index.pdf ./Publish/PBblas.pdf
