@@ -14,7 +14,7 @@ def package_files(directory):
 extra_files = package_files('ecldoc/Templates')
 print(extra_files)
 setup(
-    name="ecldoc",
+    name="HPCCSystemsECLDOc",
     version="2.0.0",
     packages=find_packages(),
     install_requires=[
